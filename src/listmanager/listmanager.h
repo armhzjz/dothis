@@ -1,6 +1,7 @@
 #ifndef _LISTMANAGER_
 #define _LISTMANAGER_
 
+#include <time.h>
 #include "datamodel.h"
 
 typedef enum {
