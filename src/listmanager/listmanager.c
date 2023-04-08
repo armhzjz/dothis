@@ -1,5 +1,5 @@
-#include<stdlib.h>
-#include<string.h>
+#include <stdlib.h>
+#include <string.h>
 #include "listmanager.h"
 
 #define RAND_STRING_SIZE 32
