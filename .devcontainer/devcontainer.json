@@ -1,0 +1,71 @@
+// For format details, see https://aka.ms/devcontainer.json
+{
+    // "name": "${localWorkspaceFolderBasename}",
+
+    // // Due to devcontainer not yet supporting the '--network host' argument when building from a Dockerfile
+    // // See: https://github.com/microsoft/vscode-remote-release/issues/3545
+    // // Workaround: build the image on the host before asking vscode to build it so that it is re-used
+    // "initializeCommand":
+    //     "DOCKER_BUILDKIT=1 docker build --progress=plain --network host --build-arg USER=todol --tag devel-todolist:bullseye .devcontainer/",
+
+    // "build": {
+    //     "dockerfile": "Dockerfile",
+    //     "context": ".",
+    //     "args": {
+    //         "USER": "todol"
+    //     }
+    // },
+
+    // First build the image by means of the build_dockeriamge.sh script
+    // The reson for this is that vscode does not support building with buildkit or specifically,
+    // does not support building the final vsc-* image using secrets of buildkit
+    "image": "devel-todolist:bullseye",
+
+    // Arguments to tuse when running the container
+    "runArgs": [ "--network=host" ],
+
+    // Environment variables to set in the container
+    "containerEnv": {},
+
+    // Volumes to mount when running the container
+    "mounts": [
+        "source=${localEnv:HOME}/.gitconfig,target=/home/exercismc/.gitconfig,type=bind",
+        "source=${localEnv:HOME}/.ssh/,target=/home/exercismc/.ssh/,type=bind",
+        "source=${localEnv:HOME}/.wakatime.cfg,target=/home/exercismc/.wakatime.cfg,type=bind",
+        "source=${localEnv:HOME}/.wakatime.bdb,target=/home/exercismc/.wakatime.bdb,type=bind",
+        "source=${localEnv:HOME}/.wakatime.log,target=/home/exercismc/.wakatime.log,type=bind",
+        "source=${localEnv:HOME}/.wakatime/,target=/home/exercismc/.wakatime/,type=bind"
+    ],
+
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        "terminal.integrated.profiles.linux": {
+            "bash": {
+                "path": "bash",
+                "icon": "terminal-bash"
+            }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+    },
+
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-themes",
+        "twxs.cmake",
+        "ms-vscode.cmake-tools",
+        "cschlosser.doxdocgen",
+        "jeff-hykin.better-cpp-syntax",
+        "ms-vscode-remote.remote-ssh",
+        "coenraads.bracket-pair-colorizer-2",
+        "franneck94.vscode-c-cpp-config",
+        "mhutchie.git-graph",
+        "github.remotehub",
+        "eamodio.gitlens",
+        "oderwat.indent-rainbow",
+        "ms-vscode.cpptools-extension-pack",
+        "vadimcn.vscode-lldb",
+        "ms-vscode.hexeditor",
+        "wakatime.vscode-wakatime"
+    ]
+}
