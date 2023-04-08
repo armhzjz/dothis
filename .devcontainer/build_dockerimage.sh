@@ -11,4 +11,4 @@ DOCKER_BUILDKIT=1 docker build --network host \
     --build-arg USER=$USERNAME \
     --build-arg UID=$(id -u) \
     --build-arg GID=$(id -g) \
-    --tag devel-todolist:bullseye .
+    --tag devel-dothis:bullseye .

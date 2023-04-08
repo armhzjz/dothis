@@ -6,7 +6,7 @@
     // // See: https://github.com/microsoft/vscode-remote-release/issues/3545
     // // Workaround: build the image on the host before asking vscode to build it so that it is re-used
     // "initializeCommand":
-    //     "DOCKER_BUILDKIT=1 docker build --progress=plain --network host --build-arg USER=todol --tag devel-todolist:bullseye .devcontainer/",
+    //     "DOCKER_BUILDKIT=1 docker build --progress=plain --network host --build-arg USER=todol --tag devel-dothis:bullseye .devcontainer/",
 
     // "build": {
     //     "dockerfile": "Dockerfile",
@@ -19,7 +19,7 @@
     // First build the image by means of the build_dockeriamge.sh script
     // The reson for this is that vscode does not support building with buildkit or specifically,
     // does not support building the final vsc-* image using secrets of buildkit
-    "image": "devel-todolist:bullseye",
+    "image": "devel-dothis:bullseye",
 
     // Arguments to tuse when running the container
     "runArgs": [ "--network=host" ],
@@ -29,12 +29,12 @@
 
     // Volumes to mount when running the container
     "mounts": [
-        "source=${localEnv:HOME}/.gitconfig,target=/home/exercismc/.gitconfig,type=bind",
-        "source=${localEnv:HOME}/.ssh/,target=/home/exercismc/.ssh/,type=bind",
-        "source=${localEnv:HOME}/.wakatime.cfg,target=/home/exercismc/.wakatime.cfg,type=bind",
-        "source=${localEnv:HOME}/.wakatime.bdb,target=/home/exercismc/.wakatime.bdb,type=bind",
-        "source=${localEnv:HOME}/.wakatime.log,target=/home/exercismc/.wakatime.log,type=bind",
-        "source=${localEnv:HOME}/.wakatime/,target=/home/exercismc/.wakatime/,type=bind"
+        "source=${localEnv:HOME}/.gitconfig,target=/home/doer/.gitconfig,type=bind",
+        "source=${localEnv:HOME}/.ssh/,target=/home/doer/.ssh/,type=bind",
+        "source=${localEnv:HOME}/.wakatime.cfg,target=/home/doer/.wakatime.cfg,type=bind",
+        "source=${localEnv:HOME}/.wakatime.bdb,target=/home/doer/.wakatime.bdb,type=bind",
+        "source=${localEnv:HOME}/.wakatime.log,target=/home/doerdoer/.wakatime.log,type=bind",
+        "source=${localEnv:HOME}/.wakatime/,target=/home/doer/.wakatime/,type=bind"
     ],
 
     // Set *default* container specific settings.json values on container create.
