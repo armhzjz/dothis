@@ -66,6 +66,7 @@
         "ms-vscode.cpptools-extension-pack",
         "vadimcn.vscode-lldb",
         "ms-vscode.hexeditor",
-        "wakatime.vscode-wakatime"
+        "wakatime.vscode-wakatime",
+        "ms-vscode.makefile-tools"
     ]
 }
