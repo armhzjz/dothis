@@ -48,13 +48,13 @@ void test_create_list_valid_due_date(void) {
 
 /* add task to list */
 void test_add_task_to_list_null_l_null_t(void) {
-    ERROR_RETURN_T r = add_task_to_list(NULL, NULL);
+    ERROR_RETURN_L r = add_task_to_list(NULL, NULL);
     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
 }
 
 void test_add_task_to_list_null_t(void) {
     todo_list_t * l = create_list("test", 0);
-    ERROR_RETURN_T r = add_task_to_list(l, NULL);
+    ERROR_RETURN_L r = add_task_to_list(l, NULL);
     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
     free(l->list_id);
     free(l);
@@ -62,31 +62,31 @@ void test_add_task_to_list_null_t(void) {
 
 // void test_add_task_to_list_null_t(void) { NEED A TASK!!!!!!
 //     task_t * 
-//     ERROR_RETURN_T r = add_task_to_list(NULL, NULL);
+//     ERROR_RETURN_L r = add_task_to_list(NULL, NULL);
 //     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
 // }
 
 /* change list name */
 void test_change_list_name_null_l_empty_name(void) {
-    ERROR_RETURN_T r = change_list_name(NULL, "");
+    ERROR_RETURN_L r = change_list_name(NULL, "");
     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
 }
 
 void test_change_list_name_null_l(void) {
-    ERROR_RETURN_T r = change_list_name(NULL, "nice_name");
+    ERROR_RETURN_L r = change_list_name(NULL, "nice_name");
     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
 }
 
 void test_change_list_name_empty_name(void) {
     todo_list_t *l = create_list("nice_name", 0);
-    ERROR_RETURN_T r = change_list_name(l, "");
+    ERROR_RETURN_L r = change_list_name(l, "");
     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
     free(l->list_id);
     free(l);
 }
 void test_change_list_name_success(void) {
     todo_list_t *l = create_list("nice_name", 0);
-    ERROR_RETURN_T r = change_list_name(l, "nice_name");
+    ERROR_RETURN_L r = change_list_name(l, "nice_name");
     TEST_ASSERT_EQUAL_CHAR(OK_R, r);
     free(l->list_id);
     free(l);
@@ -94,7 +94,7 @@ void test_change_list_name_success(void) {
 
 /* destroy list */
 void test_destroy_list_null_l(void) {
-    ERROR_RETURN_T r = destroy_list(NULL);
+    ERROR_RETURN_L r = destroy_list(NULL);
     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
 }
 
@@ -102,7 +102,7 @@ void test_destroy_list_not_empty(void) {
     todo_list_t *l = create_list("nice_name", 0);
     l->tasks_in_list_cntr = 19;
     l->tasks = (task_t *) malloc(sizeof(task_t));
-    ERROR_RETURN_T r = destroy_list(l);
+    ERROR_RETURN_L r = destroy_list(l);
     TEST_ASSERT_EQUAL_CHAR(LIST_NOT_EMPTY, r);
     free(l->tasks);
     free(l->list_id);
@@ -112,7 +112,7 @@ void test_destroy_list_not_empty(void) {
 void test_destroy_list_inconsistent_task_counter(void) {
     todo_list_t *l = create_list("nice_name", 0);
     l->tasks_in_list_cntr = 2;
-    ERROR_RETURN_T r = destroy_list(l);
+    ERROR_RETURN_L r = destroy_list(l);
     TEST_ASSERT_EQUAL_CHAR(LIST_IN_INCONSISTENT_STATE, r);
     free(l->list_id);
     free(l);
@@ -122,7 +122,7 @@ void test_destroy_list_inconsistent_tasks_ptr(void) {
     todo_list_t *l = create_list("nice_name", 0);
     l->tasks_in_list_cntr = 0;
     l->tasks = (task_t *) malloc(sizeof(task_t));
-    ERROR_RETURN_T r = destroy_list(l);
+    ERROR_RETURN_L r = destroy_list(l);
     TEST_ASSERT_EQUAL_CHAR(LIST_IN_INCONSISTENT_STATE, r);
     free(l->tasks);
     free(l->list_id);
@@ -131,13 +131,13 @@ void test_destroy_list_inconsistent_tasks_ptr(void) {
 
 /* add due date to list */
 void test_add_list_due_date_null_list(void) {
-    ERROR_RETURN_T r = add_list_due_date(NULL, 0);
+    ERROR_RETURN_L r = add_list_due_date(NULL, 0);
     TEST_ASSERT_EQUAL_CHAR(NOK_R, r);
 }
 
 void test_add_list_due_date_remove_due_date(void) {
     todo_list_t *l = create_list("nice_name", 0);
-    ERROR_RETURN_T r = add_list_due_date(l, 0);
+    ERROR_RETURN_L r = add_list_due_date(l, 0);
     TEST_ASSERT_EQUAL_CHAR(OK_R, r);
     TEST_ASSERT_EQUAL_INT64((long int)l->creation_time, (long int)l->list_due_date);
     free(l->list_id);
@@ -150,7 +150,7 @@ void test_add_list_due_date_due_date_not_valid(void) {
     tm.tm_year = 1980 - 1900;
     t = mktime(&tm);
     todo_list_t *l = create_list("nice_name", 0);
-    ERROR_RETURN_T r = add_list_due_date(l, t);
+    ERROR_RETURN_L r = add_list_due_date(l, t);
     TEST_ASSERT_EQUAL_CHAR(DUE_DATE_NOT_VALID, r);
     free(l->list_id);
     free(l);
@@ -162,7 +162,7 @@ time_t t = time(NULL);
     tm.tm_year = 2100 - 1900;
     t = mktime(&tm);
     todo_list_t *l = create_list("nice_name", 0);
-    ERROR_RETURN_T r = add_list_due_date(l, t);
+    ERROR_RETURN_L r = add_list_due_date(l, t);
     TEST_ASSERT_EQUAL_CHAR(OK_R, r);
     TEST_ASSERT_EQUAL_INT64((long int)l->list_due_date, t);
     free(l->list_id);

@@ -55,7 +55,7 @@ todo_list_t *create_list(char list_name[], time_t due_date) {
     return l; /* return pointer to the new list */
 }
 
-ERROR_RETURN_T add_task_to_list(todo_list_t *l, task_t *t) {
+ERROR_RETURN_L add_task_to_list(todo_list_t *l, task_t *t) {
     if (/* if either list or task pointers are null... */
         !l || !t)
         return NOK_R;
@@ -98,7 +98,7 @@ ERROR_RETURN_T add_task_to_list(todo_list_t *l, task_t *t) {
     return OK_R;
 }
 
-ERROR_RETURN_T change_list_name(todo_list_t *l, char new_name[]) {
+ERROR_RETURN_L change_list_name(todo_list_t *l, char new_name[]) {
     if (/* if either list or task pointers are null... */
         !l || !strcmp((const char *)"", (const char *) new_name))
         return NOK_R;
@@ -106,7 +106,7 @@ ERROR_RETURN_T change_list_name(todo_list_t *l, char new_name[]) {
     return OK_R;
 }
 
-ERROR_RETURN_T remove_task_from_list(todo_list_t *l, task_t* t) {
+ERROR_RETURN_L remove_task_from_list(todo_list_t *l, task_t* t) {
     if (/* if either list or task pointers are null... */
         !l || !t)
         return NOK_R;
@@ -151,7 +151,7 @@ ERROR_RETURN_T remove_task_from_list(todo_list_t *l, task_t* t) {
     return OK_R;
 }
 
-ERROR_RETURN_T destroy_list(todo_list_t *l) {
+ERROR_RETURN_L destroy_list(todo_list_t *l) {
     if (/* if either list or task pointers are null... */
         !l)
         return NOK_R;
@@ -167,7 +167,7 @@ ERROR_RETURN_T destroy_list(todo_list_t *l) {
     return OK_R;
 }
 
-ERROR_RETURN_T add_list_due_date(todo_list_t *l, time_t due_date) {
+ERROR_RETURN_L add_list_due_date(todo_list_t *l, time_t due_date) {
     if (/* if either list or task pointers are null... */
         !l)
         return NOK_R;
